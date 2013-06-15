@@ -1,0 +1,24 @@
+.product{
+    width: 200px;
+    height: 400px;
+    background: white;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    text-align: center;
+    margin: 4px;
+    font: 100 16px 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    padding: 2.6px;
+}
+
+.product:hover > ul.product_data{
+  display: block;
+}
+
+.product> ul.product_data{
+  background-color: lightblue;
+  display: none;
+  position: absolute;
+  text-align: left;
+}

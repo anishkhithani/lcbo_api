@@ -16,13 +16,13 @@ class HtmlGenerator
         puts "<img src= '#{product['image_thumb_url']}' class='product_img' />"
         puts "<ul class = 'product_data'>"
           puts "<li> #{product['id']}</li>"
-          puts "<li> #{product['regular_price_in_cents']}</li>"
+          puts "<li> $#{format_price(product['regular_price_in_cents'])}</li>"
           if product['price_in_cents'] != product['regular_price_in_cents'] 
-            puts "<li> On sale! #{product['price_in_cents']}</li>"
-          else
-          puts nil
+            puts "<li> On sale! $#{format_price(product['price_in_cents'])}</li>"
           end
-          puts product[""]
+          puts "<li> #{product['primary_category']}</li>"
+          puts "<li> #{product['secondary_category']}</li>"
+          puts "<li> #{product['package']}</li>"
           puts product[""]
           puts product[""]
         puts "</ul>"
@@ -32,8 +32,29 @@ class HtmlGenerator
 
 
 
-  # def product(product_id) #shows specific product all product info
-  # end
+  def show(product_id) #shows specific product all product info
+    product = retreive_data("http://lcboapi.com/products/#{product_id}")
+        print_header
+
+    puts "<h1> This what you wanted? </h1>"
+
+      puts "<div class = 'product'>"
+        puts "<h2> #{product['name']} </h2>"
+        puts "<img src= '#{product['image_thumb_url']}' class='product_img' />"
+        puts "<ul class = 'product_data'>"
+          puts "<li> #{product['id']}</li>"
+          puts "<li> $#{format_price(product['regular_price_in_cents'])}</li>"
+          if product['price_in_cents'] != product['regular_price_in_cents'] 
+            puts "<li> On sale! $#{format_price(product['price_in_cents'])}</li>"
+          end
+          puts "<li> #{product['primary_category']}</li>"
+          puts "<li> #{product['secondary_category']}</li>"
+          puts "<li> #{product['package']}</li>"
+          puts product[""]
+          puts product[""]
+        puts "</ul>"
+      puts "</div>"
+  end
 
   # def drunk
   # end
@@ -56,7 +77,7 @@ class HtmlGenerator
     puts "<!DOCTYPE html>"
     puts "<html>"
     puts "<head>"
-    puts "Dane's Dranky Dranks"
+    puts "<title> Dane's Dranky Dranks </title>"
     puts "<link type = 'css' rel='stylesheet' href='reset.css' />"
     puts "<link type = 'css' rel = 'stylesheet' href = 'style.css' />"
     puts "</head>"
@@ -66,6 +87,10 @@ class HtmlGenerator
   def print_footer
     puts "</body>"
     puts "</html>"
+  end
+
+  def format_price(cents_string)
+    cents_string.to_f/100
   end
 end
 

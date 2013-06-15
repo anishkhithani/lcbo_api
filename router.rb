@@ -15,9 +15,9 @@ else
       search_text = ARGV[1]
       generator.index(search_text)
 
-    elsif action == "product"
+    elsif action == "show"
       product_id = ARGV[1]
-      generator.product(product_id)
+      generator.show(product_id)
     end
 end
 
